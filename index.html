@@ -1,1 +1,33 @@
-my page
+<!DOCTYPE HTML>
+<html>
+  <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+		body {
+		margin : 0 !important;
+		padding : 0 !important;
+		}
+		canvas {
+		background-color: #000000;
+		border 1px solid #ffffff;
+        }
+	</style>
+  </head> 
+   <body onload="startGame()">
+    <script>
+      function startGame() {
+		myGameArea.start();
+	  }
+	  
+	  var myGameArea = {
+		canvas : document.createElement("canvas"),
+		start : function() {
+			this.canvas.width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+			this.canvas.height = (window.innerHeight > 0) ? window.innerHeight : screen.height;
+			this.context = this.canvas.getContext("2d");
+			document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+		}
+		}
+    </script>
+  </body>
+</html>
