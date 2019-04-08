@@ -79,11 +79,23 @@
       myGamePiece.speedY = event.accelerationIncludingGravity.y * (-1);
     }
 
-    if (window.deviceOrientationEvent) {
-      window.addEventListener('devicemotion', handleOrientation);
-    } else {
-      alert("Lea ist supi!");
-    }
+    /*if (window.DeviceOrientationEvent) {
+    window.addEventListener("devicemotion", function(event) {
+        // alpha: rotation around z-axis
+        var rotateDegrees = event.alpha;
+        // gamma: left to right
+        var leftToRight = event.gamma;
+        // beta: front back motion
+        var frontToBack = event.beta;
+
+
+    }, true);
+  } else {
+    alert("Lea ist supi!");
+  }*/
+  window.addEventListener('devicemotion', function(event) {
+  console.log(event.acceleration.x + ' m/s2');
+  });
     </script>
   </body>
 </html>
