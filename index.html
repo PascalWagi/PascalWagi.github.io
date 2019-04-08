@@ -16,7 +16,7 @@
     <script>
       function startGame() {
 		myGameArea.start();
-    myGamePiece = new component(30, 30, "#770000", 10, 120);
+    myGamePiece = new component(30, 30, "#FF0000", 10, 120);
 	  }
 
     var myGamePiece;
@@ -78,7 +78,7 @@
     window.addEventListener("devicemotion", function(event) {
         // alpha: rotation around z-axis
         var rotateDegrees = event.alpha;
-        myGamePiece.speedX = rotateDegrees / 20;
+        myGamePiece.speedX = 5;
         // gamma: left to right
         var leftToRight = event.gamma;
         // beta: front back motion
