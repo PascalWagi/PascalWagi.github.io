@@ -75,8 +75,8 @@
     }
 
     function handleOrientation(event) {
-      myGamePiece.x = event.accelerationIncludingGravity.x * (-1);
-      myGamePiece.y = event.accelerationIncludingGravity.y * (-1);
+      myGamePiece.speedX = event.accelerationIncludingGravity.x * (-1);
+      myGamePiece.speedY = event.accelerationIncludingGravity.y * (-1);
     }
 
     if (window.deviceOrientationEvent) {
