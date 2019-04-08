@@ -16,7 +16,7 @@
     <script>
       function startGame() {
 		myGameArea.start();
-    myGamePiece = new component(30, 30, "#FF0000", 10, 120);
+    myGamePiece = new component(30, 30, "#770000", 10, 120);
 	  }
 
     var myGamePiece;
@@ -79,10 +79,11 @@
       myGamePiece.speedY = event.accelerationIncludingGravity.y * (-1);
     }
 
-    /*if (window.DeviceOrientationEvent) {
+    if (window.DeviceOrientationEvent) {
     window.addEventListener("devicemotion", function(event) {
         // alpha: rotation around z-axis
         var rotateDegrees = event.alpha;
+        myGamePiece.speedX = rotateDegrees;
         // gamma: left to right
         var leftToRight = event.gamma;
         // beta: front back motion
@@ -92,10 +93,7 @@
     }, true);
   } else {
     alert("Lea ist supi!");
-  }*/
-  window.addEventListener('devicemotion', function(event) {
-  console.log(event.acceleration.x + ' m/s2');
-  });
+  }
     </script>
   </body>
 </html>
