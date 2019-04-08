@@ -74,16 +74,11 @@
       myGamePiece.x -= 1;
     }
 
-    function handleOrientation(event) {
-      myGamePiece.speedX = event.accelerationIncludingGravity.x * (-1);
-      myGamePiece.speedY = event.accelerationIncludingGravity.y * (-1);
-    }
-
     if (window.DeviceOrientationEvent) {
     window.addEventListener("devicemotion", function(event) {
         // alpha: rotation around z-axis
         var rotateDegrees = event.alpha;
-        myGamePiece.speedX = rotateDegrees;
+        myGamePiece.speedX = rotateDegrees / 20;
         // gamma: left to right
         var leftToRight = event.gamma;
         // beta: front back motion
