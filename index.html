@@ -69,28 +69,12 @@
       myGamePiece.update();
     }
 
-    function moveUp() {
-      myGamePiece.y -= 1;
-    }
-
-    function moveDown() {
-      myGamePiece.y += 1;
-    }
-
-    function moveRight() {
-      myGamePiece.x += 1;
-    }
-
-    function moveLeft() {
-      myGamePiece.x -= 1;
-    }
-
     if (window.DeviceOrientationEvent) {
     window.addEventListener("devicemotion", function(event) {
         // alpha: rotation around z-axis
         var rotateDegrees = event.alpha;
         myGamePiece.speedX = event.accelerationIncludingGravity.x * (-1);
-        myGamePiece.speedY = event.accelerationIncludingGravity.y;
+        //myGamePiece.speedY = event.accelerationIncludingGravity.y;
         // gamma: left to right
         var leftToRight = event.gamma;
         // beta: front back motion
