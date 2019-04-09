@@ -41,6 +41,8 @@
       this.height = height;
       this.speedX = 0;
       this.speedY = 0;
+      this.gravity = 0.05;
+      this.gravitySpeed = 0;
       this.x = x;
       this.y = y;
       this.update = function() {
@@ -50,13 +52,14 @@
       }
       this.newPos = function() {
         this.x += this.speedX;
+        this.gravitySpeed += this.gravity;
         if (this.x < 0) {
           this.x = 0;
         }
         if (this.x + width >= canvasWidth) {
           this.x = canvasWidth - width;
         }
-        this.y += this.speedY;
+        this.y += this.speedY + this.gravitySpeed;
         if (this.y + height >= canvasHeight) {
           this.y = canvasHeight - height;
         }
@@ -74,13 +77,6 @@
         // alpha: rotation around z-axis
         var rotateDegrees = event.alpha;
         myGamePiece.speedX = event.accelerationIncludingGravity.x * (-1);
-        //myGamePiece.speedY = event.accelerationIncludingGravity.y;
-        // gamma: left to right
-        var leftToRight = event.gamma;
-        // beta: front back motion
-        var frontToBack = event.beta;
-
-
     }, true);
   } else {
     alert("Lea ist supi!");
