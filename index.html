@@ -18,12 +18,14 @@
 		myGameArea.start();
     myGamePiece = new component(30, 30, "#FF0000", 10, 120);
     myObstacle = new component(50, 10, "#00FF00", 300, 300);
+    myObstacle2 = new component(50, 10, "#00FF00", 150, 150);
 	  }
 
     var canvasWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
     var canvasHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height;
     var myGamePiece;
     var myObstacle;
+    var myObstacle2;
 	  var myGameArea = {
 		canvas : document.createElement("canvas"),
 		start : function() {
@@ -108,6 +110,17 @@
         ctx.fillRect(this.x, this.y, this.width, this.height);
       }
     }
+    function obstacle2(width, height, color, x, y) {
+      this.width = width;
+      this.height = height;
+      this.x = x;
+      this.y = y;
+      this.update = function() {
+        ctx = myGameArea.context;
+        ctx.fillStyle = color;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+      }
+    }
 
     function updateGameArea() {
       if (myGamePiece.collisionWith(myObstacle)) {
@@ -117,6 +130,7 @@
       myGamePiece.newPos();
       myGamePiece.update();
       myObstacle.update();
+      myObstacle2.update();
     }
 
     if (window.DeviceOrientationEvent) {
