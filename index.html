@@ -53,7 +53,7 @@
         if (this.x < 0) {
           this.x = 0;
         }
-        if (this.x >= canvasWidth) {
+        if (this.x + width >= canvasWidth) {
           this.x = canvasWidth - width;
         }
         this.y += this.speedY;
