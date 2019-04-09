@@ -83,7 +83,8 @@
         if ((mybottom < othertop) ||
           (mytop > otherbottom) ||
           (myright < otherleft) ||
-          (myleft > otherright)) {
+          (myleft > otherright) ||
+          (this.gravitySpeed < 0)) {
             collision = false;
           }
           return collision;
