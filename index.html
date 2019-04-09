@@ -35,6 +35,9 @@
 		},
     clear : function() {
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+    stop : function() {
+      clearInterval(this.interval);
     }
 		}
 
@@ -42,7 +45,6 @@
       this.width = width;
       this.height = height;
       this.speedX = 0;
-      this.speedY = 0;
       this.gravity = 0.1;
       this.gravitySpeed = 0;
       this.bounce = 7;
@@ -62,11 +64,29 @@
         if (this.x + width >= canvasWidth) {
           this.x = canvasWidth - width;
         }
-        this.y += this.speedY + this.gravitySpeed;
+        this.y += this.gravitySpeed;
         if (this.y + height >= canvasHeight) {
           this.y = canvasHeight - height;
           this.gravitySpeed = -(this.bounce);
         }
+      }
+      this.collisionWith = function(otherObject) {
+        var mytop = this.y;
+        var mybottom = this.y + this.height;
+        var myleft = this.x
+        var myright = this.x + this.width;
+        var othertop = otherObject.y;
+        var otherbottom = otherObject.y + otherObject.height;
+        var otherleft = otherObject.x
+        var otherright = otherObject.x + otherObject.width;
+        var collision = false;
+        if ((mybottom < othertop) ||
+          (mytop > otherbottom) ||
+          (myright < otherleft) ||
+          (myleft > otherright)) {
+            collision = false;
+          }
+          return collision;
       }
     }
 
@@ -83,6 +103,9 @@
     }
 
     function updateGameArea() {
+      if (myGamePiece.collisionWith(myObstacle)) {
+        myGameArea.stop();
+      }
       myGameArea.clear();
       myGamePiece.newPos();
       myGamePiece.update();
