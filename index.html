@@ -50,6 +50,7 @@
       this.bounce = 7;
       this.x = x;
       this.y = y;
+      this.checkCollision = false;
       this.update = function() {
         ctx = myGameArea.context;
         ctx.fillStyle = color;
@@ -57,7 +58,12 @@
       }
       this.newPos = function() {
         this.x += this.speedX;
-        this.gravitySpeed += this.gravity;
+        if (this.checkCollision) {
+          this.gravitySpeed = -(this.bounce);
+          this.checkCollision = false;
+        } else {
+          this.gravitySpeed += this.gravity;
+        }
         if (this.x < 0) {
           this.x = 0;
         }
@@ -105,7 +111,7 @@
 
     function updateGameArea() {
       if (myGamePiece.collisionWith(myObstacle)) {
-        myGameArea.stop();
+        myGamePiece.checkCollision = true;
       }
       myGameArea.clear();
       myGamePiece.newPos();
