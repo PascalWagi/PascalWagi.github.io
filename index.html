@@ -25,6 +25,7 @@
     var canvasHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height;
     var myGamePiece;
     var myObstacles = [];
+    var obstacleDistance = 60;
 	  var myGameArea = {
 		canvas : document.createElement("canvas"),
 		start : function() {
@@ -113,6 +114,15 @@
             myObstacles[i].y += (-1) * myGamePiece.gravitySpeed;
           }
         }
+        if (myGamePiece.gravitySpeed < 0) {
+          myGameArea.countFrame += 1
+        }
+      }
+      if (myGameArea.countFrame > obstacleDistance) {
+        x = Math.random() * (canvasWidth - myObstacles[0].width);
+        y = 0;
+        myObstacles.push(new component(50, 10, "#00FF00", x, y));
+        myGameArea.countFrame = 0;
       }
       myGameArea.clear();
       myGamePiece.newPos();
