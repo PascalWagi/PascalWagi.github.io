@@ -67,10 +67,10 @@
           this.gravitySpeed += this.gravity;
         }
         if (this.x < 0) {
-          this.x = 0;
+          this.x = canvasWidth - this.width;
         }
         if (this.x + width >= canvasWidth) {
-          this.x = canvasWidth - width;
+          this.x = 0;
         }
         this.y += this.gravitySpeed;
         if (this.y + height >= canvasHeight) {
