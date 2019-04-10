@@ -78,6 +78,9 @@
           this.y = canvasHeight - height;
           this.gravitySpeed = -(this.bounce);
         }
+        if (this.y <= canvasHeight / 2) {
+          this.y = (canvasHeight / 2)
+        }
       }
       this.collisionWith = function(otherObject) {
         var mytop = this.y;
@@ -108,7 +111,7 @@
           myGamePiece.checkCollision = true;
         }
       }
-      if (myGamePiece.y < canvasHeight / 2) {
+      if (myGamePiece.y <= canvasHeight / 2) {
         for (i = 0; i < myObstacles.length; i += 1) {
           if (myGamePiece.gravitySpeed < 0) {
             myObstacles[i].y += (-1) * myGamePiece.gravitySpeed;
