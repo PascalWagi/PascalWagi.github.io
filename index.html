@@ -17,15 +17,14 @@
       function startGame() {
 		myGameArea.start();
     myGamePiece = new component(30, 30, "#FF0000", 10, 120);
-    myObstacle = new component(50, 10, "#00FF00", 300, 300);
-    myObstacle2 = new component(50, 10, "#00FF00", 150, 150);
+    myObstacles.push(new component(50, 10, "#00FF00", 300, 300));
+    myObstacles.push(new component(50, 10, "#00FF00", 150, 150));
 	  }
 
     var canvasWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
     var canvasHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height;
     var myGamePiece;
-    var myObstacle;
-    var myObstacle2;
+    var myObstacles = [];
 	  var myGameArea = {
 		canvas : document.createElement("canvas"),
 		start : function() {
@@ -34,6 +33,7 @@
 			this.context = this.canvas.getContext("2d");
 			document.body.insertBefore(this.canvas, document.body.childNodes[0]);
       this.interval = setInterval(updateGameArea, 20);
+      this.countFrame = 0;
 		},
     clear : function() {
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -99,7 +99,7 @@
       }
     }
 
-    function obstacle(width, height, color, x, y) {
+    /*function obstacle(width, height, color, x, y) {
       this.width = width;
       this.height = height;
       this.x = x;
@@ -120,23 +120,26 @@
         ctx.fillStyle = color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
       }
-    }
+    }*/
 
     function updateGameArea() {
-      if (myGamePiece.collisionWith(myObstacle) || myGamePiece.collisionWith(myObstacle2)) {
-        myGamePiece.checkCollision = true;
+      var x;
+      var y;
+      for (i = 0; i < myObstacles.length; i += 1) {
+        if (myGamePiece.collisionWith(myObstacles[i])) {
+          myGamePiece.checkCollision = true;
+        }
       }
       myGameArea.clear();
       myGamePiece.newPos();
       myGamePiece.update();
-      myObstacle.update();
-      myObstacle2.update();
+      for (i = 0; i < myObstacles.length; i += 1) {
+        myObstacles[i].update();
+      }
     }
 
     if (window.DeviceOrientationEvent) {
     window.addEventListener("devicemotion", function(event) {
-        // alpha: rotation around z-axis
-        var rotateDegrees = event.alpha;
         myGamePiece.speedX = event.accelerationIncludingGravity.x * (-1);
     }, true);
   } else {
