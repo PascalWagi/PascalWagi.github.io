@@ -125,7 +125,7 @@
         x = Math.random() * (canvasWidth - myObstacles[0].width);
         y = 0;
         myObstacles.push(new component(50, 10, "#00FF00", x, y));
-        myGameArea.countFrame = 0;
+        myGameArea.countFrame -= obstacleDistance;
       }
       myGameArea.clear();
       myGamePiece.newPos();
