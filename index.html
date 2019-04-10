@@ -69,7 +69,7 @@
         if (this.x < 0) {
           this.x = canvasWidth - this.width;
         }
-        if (this.x + width >= canvasWidth) {
+        if (this.x + width > canvasWidth) {
           this.x = 0;
         }
         this.y += this.gravitySpeed;
