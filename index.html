@@ -16,10 +16,11 @@
     <script>
       function startGame() {
 		myGameArea.start();
-    myGamePiece = new component(30, 30, "#FF0000", 10, 500);
-    myObstacles.push(new component(50, 10, "#00FF00", 300, 300));
-    myObstacles.push(new component(50, 10, "#00FF00", 150, 150));
-    myObstacles.push(new component(50, 10, "#00FF00", 200, 0));
+    myGamePiece = new component(30, 30, "#FF0000", 10, 500, "rectangle");
+    score = new component("30px", "Consolas", "black", 40, 40, "text");
+    myObstacles.push(new component(50, 10, "#00FF00", 300, 300, "rectangle"));
+    myObstacles.push(new component(50, 10, "#00FF00", 150, 150, "rectangle"));
+    myObstacles.push(new component(50, 10, "#00FF00", 200, 0, "rectangle"));
 	  }
 
     var canvasWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
@@ -27,6 +28,7 @@
     var myGamePiece;
     var myObstacles = [];
     var obstacleDistance = 25;
+    var score;
 	  var myGameArea = {
 		canvas : document.createElement("canvas"),
 		start : function() {
@@ -45,7 +47,7 @@
     }
 		}
 
-    function component(width, height, color, x, y) {
+    function component(width, height, color, x, y, type) {
       this.width = width;
       this.height = height;
       this.speedX = 0;
@@ -55,10 +57,18 @@
       this.x = x;
       this.y = y;
       this.checkCollision = false;
+      this.type = type;
       this.update = function() {
         ctx = myGameArea.context;
         ctx.fillStyle = color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        // checke ob component ein text oder rectangle ist.
+        if (this.type == "rectangle") {
+          ctx.fillRect(this.x, this.y, this.width, this.height);
+        } else {
+          ctx.font = this.width + " " + this.height;
+          ctx.fillText(this.text, this.x, this.y);
+        }
+
       }
       this.newPos = function() {
         this.x += this.speedX;
@@ -129,6 +139,8 @@
         myGameArea.countFrame -= obstacleDistance;
       }
       myGameArea.clear();
+      score.text = "Score: " + myGameArea.countFrame;
+      score.update();
       myGamePiece.newPos();
       myGamePiece.update();
       for (i = 0; i < myObstacles.length; i += 1) {
