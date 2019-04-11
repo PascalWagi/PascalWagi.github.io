@@ -125,7 +125,7 @@
       var y;
       for (i = 0; i < myObstacles.length; i += 1) {
         if (myGamePiece.collisionWith(myObstacles[i])) {
-          countCollisions += 1;
+          checkLastObstacle(myObstacles[i]);
           myGamePiece.checkCollision = true;
         }
       }
@@ -145,13 +145,22 @@
         myObstacles.push(new component(50, 10, "#00FF00", x, y, "rectangle"));
       }
       myGameArea.clear();
-      score.text = "Score: " + countCollisions;
+      score.text = "Score: " + countCollision;
       score.update();
       myGamePiece.newPos();
       myGamePiece.update();
       for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].update();
       }
+    }
+    var lastCountedObstacle = null;
+    function checkLastObstacle(obstacle) {
+      if(lastCountedObstacle != obstacle) {
+        countCollision += 1;
+        lastCountedObstacle = obstacle;
+        return true;
+      }
+      return false;
     }
     //Prüft ob ein neues Hindernis gesetzt werden soll.
     var lastObstacle;
