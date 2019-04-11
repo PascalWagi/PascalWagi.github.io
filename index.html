@@ -138,11 +138,10 @@
           myGameArea.countFrame += 1
         }
       }
-      if (myGameArea.countFrame > obstacleDistance) {
+      if (checkNewObstacle(myGameArea.countFrame)) {
         x = Math.random() * (canvasWidth - myObstacles[0].width);
         y = 0;
         myObstacles.push(new component(50, 10, "#00FF00", x, y, "rectangle"));
-        myGameArea.countFrame -= obstacleDistance;
       }
       myGameArea.clear();
       score.text = "Score: " + myGameArea.countFrame;
@@ -152,6 +151,14 @@
       for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].update();
       }
+    }
+    //Prüft ob ein neues Hindernis gesetzt werden soll.
+    function checkNewObstacle(count) {
+      //False bei Score: 0
+      if (count % obstacleDistance == 0 && myGameArea.countFrame != 0) {
+        return true;
+      }
+      return false;
     }
 
     if (window.DeviceOrientationEvent) {
