@@ -153,9 +153,11 @@
       }
     }
     //Prüft ob ein neues Hindernis gesetzt werden soll.
+    var lastObstacle;
     function checkNewObstacle(count) {
       //False bei Score: 0
-      if (count % obstacleDistance == 0 && myGameArea.countFrame != 0) {
+      if (count % obstacleDistance == 0 && lastObstacle != count) {
+        lastObstacle = count;
         return true;
       }
       return false;
