@@ -28,7 +28,7 @@
     var myObstacles = [];
     var obstacleDistance = 25;
     var score;
-    var countCollision = 0;
+    var countScore = 0;
 	  var myGameArea = {
 		canvas : document.createElement("canvas"),
 		start : function() {
@@ -44,6 +44,9 @@
     },
     stop : function() {
       clearInterval(this.interval);
+      var gameOver = new component("50px", "Consolas", "red", 70, 70, "text");
+      gameOver.text = "GAME OVER \n YOUR SCORE: " + countScore;
+      gameOver.update();
     }
 		}
 
@@ -90,8 +93,13 @@
         this.y += this.gravitySpeed;
         //Abspringen bei Aufprall mit dem Boden.
         if (this.y + height >= canvasHeight) {
-          this.y = canvasHeight - height;
-          this.gravitySpeed = -(this.bounce);
+          if (countScore != 0) {
+            myGameArea.stop();
+          } else {
+            this.y = canvasHeight - height;
+            this.gravitySpeed = -(this.bounce);
+          }
+
         }
         //Rechteck darf nicht über die Hälfte des Bildschirms springen.
         if (this.y <= canvasHeight / 2) {
@@ -145,7 +153,7 @@
         myObstacles.push(new component(50, 10, "#00FF00", x, y, "rectangle"));
       }
       myGameArea.clear();
-      score.text = "Score: " + countCollision;
+      score.text = "Score: " + countScore;
       score.update();
       myGamePiece.newPos();
       myGamePiece.update();
@@ -153,10 +161,11 @@
         myObstacles[i].update();
       }
     }
+    //Bei Kollision mit neuem Hindernis, inkrementiere Score um 1.
     var lastCountedObstacle = null;
     function checkLastObstacle(obstacle) {
       if(lastCountedObstacle != obstacle) {
-        countCollision += 1;
+        countScore += 1;
         lastCountedObstacle = obstacle;
         return true;
       }
@@ -165,7 +174,6 @@
     //Prüft ob ein neues Hindernis gesetzt werden soll.
     var lastObstacle;
     function checkNewObstacle(count) {
-      //False bei Score: 0
       if (count % obstacleDistance == 0 && lastObstacle != count) {
         lastObstacle = count;
         return true;
