@@ -61,7 +61,7 @@
       this.update = function() {
         ctx = myGameArea.context;
         ctx.fillStyle = color;
-        // checke ob component ein text oder rectangle ist.
+        //Checke ob component ein text oder rectangle ist.
         if (this.type == "rectangle") {
           ctx.fillRect(this.x, this.y, this.width, this.height);
         } else {
@@ -72,27 +72,33 @@
       }
       this.newPos = function() {
         this.x += this.speedX;
+        //Bei Kollision abspringen nach oben, sonst weiter abfallen.
         if (this.checkCollision) {
           this.gravitySpeed = -(this.bounce);
           this.checkCollision = false;
         } else {
           this.gravitySpeed += this.gravity;
         }
+        //Bei Verlassen des linken Randes am rechten erscheinen.
         if (this.x < 0) {
           this.x = canvasWidth - this.width;
         }
+        //Bei Verlassen des rechten Randes am linken erscheinen.
         if (this.x + width > canvasWidth) {
           this.x = 0;
         }
         this.y += this.gravitySpeed;
+        //Abspringen bei Aufprall mit dem Boden.
         if (this.y + height >= canvasHeight) {
           this.y = canvasHeight - height;
           this.gravitySpeed = -(this.bounce);
         }
+        //Rechteck darf nicht über die Hälfte des Bildschirms springen.
         if (this.y <= canvasHeight / 2) {
           this.y = (canvasHeight / 2)
         }
       }
+      //Funktion zum Überprüfen einer Kollision.
       this.collisionWith = function(otherObject) {
         var mytop = this.y;
         var mybottom = this.y + this.height;
@@ -135,7 +141,7 @@
       if (myGameArea.countFrame > obstacleDistance) {
         x = Math.random() * (canvasWidth - myObstacles[0].width);
         y = 0;
-        myObstacles.push(new component(50, 10, "#00FF00", x, y));
+        myObstacles.push(new component(50, 10, "#00FF00", x, y, "rectangle"));
         myGameArea.countFrame -= obstacleDistance;
       }
       myGameArea.clear();
@@ -147,6 +153,8 @@
         myObstacles[i].update();
       }
     }
+
+    function
 
     if (window.DeviceOrientationEvent) {
     window.addEventListener("devicemotion", function(event) {
