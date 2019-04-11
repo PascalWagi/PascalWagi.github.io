@@ -17,10 +17,9 @@
       function startGame() {
 		myGameArea.start();
     myGamePiece = new component(30, 30, "#FF0000", 10, 500, "rectangle");
-    score = new component("30px", "Consolas", "black", 40, 40, "text");
+    score = new component("30px", "Consolas", "white", 40, 40, "text");
     myObstacles.push(new component(50, 10, "#00FF00", 300, 300, "rectangle"));
     myObstacles.push(new component(50, 10, "#00FF00", 150, 150, "rectangle"));
-    myObstacles.push(new component(50, 10, "#00FF00", 200, 0, "rectangle"));
 	  }
 
     var canvasWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
@@ -29,6 +28,7 @@
     var myObstacles = [];
     var obstacleDistance = 25;
     var score;
+    var countCollisions = 0;
 	  var myGameArea = {
 		canvas : document.createElement("canvas"),
 		start : function() {
@@ -125,6 +125,7 @@
       var y;
       for (i = 0; i < myObstacles.length; i += 1) {
         if (myGamePiece.collisionWith(myObstacles[i])) {
+          countCollisions += 1;
           myGamePiece.checkCollision = true;
         }
       }
@@ -144,7 +145,7 @@
         myObstacles.push(new component(50, 10, "#00FF00", x, y, "rectangle"));
       }
       myGameArea.clear();
-      score.text = "Score: " + myGameArea.countFrame;
+      score.text = "Score: " + countCollisions;
       score.update();
       myGamePiece.newPos();
       myGamePiece.update();
