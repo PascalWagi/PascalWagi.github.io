@@ -190,6 +190,12 @@
         case 180:
           myGamePiece.speedX = event.accelerationIncludingGravity.x;
           break;
+        case 90:
+          myGamePiece.speedX = event.accelerationIncludingGravity.y;
+          break;
+        case -90:
+          myGamePiece.speedX = event.accelerationIncludingGravity.y * (-1);
+          break;
       }
 
     }, true);
