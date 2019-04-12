@@ -44,8 +44,8 @@
     },
     stop : function() {
       clearInterval(this.interval);
-      var gameOver = new component("50px", "Consolas", "red", 50, 250, "text");
-      gameOver.text = "GAME OVER \n YOUR SCORE: " + countScore;
+      var gameOver = new component("50px", "Consolas", "red", 50, canvasHeight / 2, "text");
+      gameOver.text = "GAME OVER";
       gameOver.update();
     }
 		}
