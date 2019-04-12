@@ -155,11 +155,11 @@
       myGameArea.clear();
       score.text = "Score: " + countScore;
       score.update();
-      myGamePiece.newPos();
 
       for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].update();
       }
+      myGamePiece.newPos();
       myGamePiece.update();
     }
     //Bei Kollision mit neuem Hindernis, inkrementiere Score um 1.
