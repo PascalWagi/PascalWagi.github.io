@@ -153,12 +153,11 @@
         myObstacles.push(new component(50, 10, "#00FF00", x, y, "rectangle"));
       }
       myGameArea.clear();
-      score.text = "Score: " + countScore;
-      score.update();
-
       for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].update();
       }
+      score.text = "Score: " + countScore;
+      score.update();
       myGamePiece.newPos();
       myGamePiece.update();
     }
@@ -184,7 +183,12 @@
 
     if (window.DeviceOrientationEvent) {
     window.addEventListener("devicemotion", function(event) {
-        myGamePiece.speedX = event.accelerationIncludingGravity.x * (-1);
+      switch(window.orientation) {
+        case 0:
+          myGamePiece.speedX = event.accelerationIncludingGravity.x * (-1);
+          break;
+      }
+
     }, true);
   } else {
     alert("Lea ist supi!");
