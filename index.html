@@ -209,7 +209,7 @@
 
     if (window.DeviceOrientationEvent) {
     window.addEventListener("devicemotion", function(event) {
-      if (isMobile == "IEMobile") {
+      if (isMobile.Windows()) {
         event.accelerationIncludingGravity.x;
       } else {
       switch(window.orientation) {
