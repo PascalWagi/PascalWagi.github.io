@@ -211,7 +211,7 @@
     window.addEventListener("devicemotion", function(event) {
       score.text = "test: " + isMobile.Windows();
       score.update();
-      } else {
+
       switch(window.orientation) {
         case 0:
           myGamePiece.speedX = event.accelerationIncludingGravity.x * (-1);
@@ -226,7 +226,7 @@
           myGamePiece.speedX = event.accelerationIncludingGravity.y * (-1);
           break;
       }
-    }
+    
     }, true);
   } else {
     alert("Lea ist supi!");
