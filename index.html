@@ -166,7 +166,7 @@
       for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].update();
       }
-      score.text = "Score: " + countScore;
+      //score.text = "Score: " + countScore;
       //score.update();
       myGamePiece.newPos();
       myGamePiece.update();
@@ -193,7 +193,7 @@
 
     if (window.DeviceOrientationEvent) {
     window.addEventListener("devicemotion", function(event) {
-      score.text = event.accelerationIncludingGravity.x;
+      score.text = "x: " + event.accelerationIncludingGravity.x;
       score.update();
       switch(window.orientation) {
         case 0:
