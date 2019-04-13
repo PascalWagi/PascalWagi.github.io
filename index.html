@@ -182,8 +182,8 @@
       for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].update();
       }
-      score.text = "Score: " + countScore;
-      score.update();
+      //score.text = "Score: " + countScore;
+      //score.update();
       myGamePiece.newPos();
       myGamePiece.update();
     }
@@ -209,8 +209,8 @@
 
     if (window.DeviceOrientationEvent) {
     window.addEventListener("devicemotion", function(event) {
-      if (isMobile.Windows()) {
-        event.accelerationIncludingGravity.x;
+      score.text = "test: " + isMobile.Windows();
+      score.update();
       } else {
       switch(window.orientation) {
         case 0:
