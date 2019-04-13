@@ -22,7 +22,7 @@
     myObstacles.push(new component(50, 10, "#00FF00", 150, 150, "rectangle"));
     var countObs =  getCanvasHeight() / 150;
     var obsHeight = getCanvasHeight() - 150;
-    for(i = 0; i < 20; i += 1) {
+    for(i = 0; i < countObs; i += 1) {
       myObstacles.push(new component(50, 10, "#00FF00", 300, obsHeight, "rectangle"));
       obsHeight -= 150;
     }
