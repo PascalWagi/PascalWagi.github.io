@@ -20,12 +20,12 @@
     score = new component("30px", "Consolas", "white", 40, 40, "text");
     myObstacles.push(new component(50, 10, "#00FF00", 300, 300, "rectangle"));
     myObstacles.push(new component(50, 10, "#00FF00", 150, 150, "rectangle"));
-    var countObs = canvasHeight / 150;
-    var obsHeight = canvasHeight - 150;
-    /*for(int i = 0; i < countObs; i += 1) {
+    var countObs =  getCanvasHeight() / 150;
+    var obsHeight = getCanvasHeight() - 150;
+    for(i = 0; i < 20; i += 1) {
       myObstacles.push(new component(50, 10, "#00FF00", 300, obsHeight, "rectangle"));
       obsHeight -= 150;
-    }*/
+    }
 	  }
 
     var canvasWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
@@ -55,6 +55,10 @@
       gameOver.update();
     }
 		}
+
+    function getCanvasHeight() {
+      return canvasHeight;
+    }
 
     function component(width, height, color, x, y, type) {
       this.width = width;
