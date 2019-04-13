@@ -183,11 +183,11 @@
 
     if (window.DeviceOrientationEvent) {
     window.addEventListener("devicemotion", function(event) {
-      /*switch(window.orientation) {
+      switch(window.orientation) {
         case 0:
           myGamePiece.speedX = event.accelerationIncludingGravity.x * (-1);
           break;
-        /*case 180:
+        case 180:
           myGamePiece.speedX = event.accelerationIncludingGravity.x;
           break;
         case 90:
@@ -196,8 +196,7 @@
         case -90:
           myGamePiece.speedX = event.accelerationIncludingGravity.y * (-1);
           break;
-      }*/
-      myGamePiece.speedX = event.accelerationIncludingGravity.x * (-1);
+      }
     }, true);
   } else {
     alert("Lea ist supi!");
