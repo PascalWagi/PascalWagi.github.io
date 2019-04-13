@@ -27,7 +27,23 @@
       obsHeight -= 150;
     }
 	  }
-
+    var isMobile = {
+    Android: function () {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function () {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function () {
+        return navigator.userAgent.match(/iPhone|iPod|iPad/i);
+    },
+    Opera: function () {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function () {
+        return navigator.userAgent.match(/IEMobile/i);
+    },
+  }
     var canvasWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
     var canvasHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height;
     var myGamePiece;
@@ -166,8 +182,8 @@
       for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].update();
       }
-      //score.text = "Score: " + countScore;
-      //score.update();
+      score.text = "Score: " + countScore;
+      score.update();
       myGamePiece.newPos();
       myGamePiece.update();
     }
@@ -193,8 +209,9 @@
 
     if (window.DeviceOrientationEvent) {
     window.addEventListener("devicemotion", function(event) {
-      score.text = "x: " + event.accelerationIncludingGravity.x;
-      score.update();
+      if (isMobile == "IEMobile") {
+        event.accelerationIncludingGravity.x;
+      } else {
       switch(window.orientation) {
         case 0:
           myGamePiece.speedX = event.accelerationIncludingGravity.x * (-1);
@@ -209,6 +226,7 @@
           myGamePiece.speedX = event.accelerationIncludingGravity.y * (-1);
           break;
       }
+    }
     }, true);
   } else {
     alert("Lea ist supi!");
