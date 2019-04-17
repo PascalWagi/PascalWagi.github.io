@@ -12,7 +12,7 @@
         }
 	</style>
   </head>
-   <body onload="startGame()">
+   <body>
     <script>
       function startGame() {
 		myGameArea.start();
@@ -27,25 +27,8 @@
       obsHeight -= 150;
     }
 	  }
-    var isMobile = {
-    Android: function () {
-        return navigator.userAgent.match(/Android/i);
-    },
-    BlackBerry: function () {
-        return navigator.userAgent.match(/BlackBerry/i);
-    },
-    iOS: function () {
-        return navigator.userAgent.match(/iPhone|iPod|iPad/i);
-    },
-    Opera: function () {
-        return navigator.userAgent.match(/Opera Mini/i);
-    },
-    Windows: function () {
-        return navigator.userAgent.match(/IEMobile/i);
-    },
-  }
     var canvasWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-    var canvasHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height;
+    var canvasHeight = window.screen.availHeight;//(window.innerHeight > 0) ? window.innerHeight : screen.height;
     var myGamePiece;
     var myObstacles = [];
     var obstacleDistance = 25;
@@ -182,8 +165,8 @@
       for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].update();
       }
-      //score.text = "Score: " + countScore;
-      //score.update();
+      score.text = "Score: " + countScore;
+      score.update();
       myGamePiece.newPos();
       myGamePiece.update();
     }
@@ -209,9 +192,6 @@
 
     if (window.DeviceOrientationEvent) {
     window.addEventListener("devicemotion", function(event) {
-      score.text = "test: " + isMobile.Windows();
-      score.update();
-
       switch(window.orientation) {
         case 0:
           myGamePiece.speedX = event.accelerationIncludingGravity.x * (-1);
@@ -226,11 +206,29 @@
           myGamePiece.speedX = event.accelerationIncludingGravity.y * (-1);
           break;
       }
-    
+
     }, true);
   } else {
     alert("Lea ist supi!");
   }
+
+  function fullScreen() {
+    var elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) { /* Firefox */
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE/Edge */
+        elem.msRequestFullscreen();
+      }
+
+    element = document.getElementById("start")
+    element.parentNode.removeChild(element);
+    startGame();
+  }
     </script>
+    <button id="start" onClick="fullScreen();"> Starte im Vollbildmodus </button>
   </body>
 </html>
