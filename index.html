@@ -23,12 +23,12 @@
     var countObs =  getCanvasHeight() / 150;
     var obsHeight = getCanvasHeight() - 150;
     for(i = 0; i < countObs; i += 1) {
-      myObstacles.push(new component(50, 10, "#00FF00", 300, obsHeight, "rectangle"));
+      myObstacles.push(new component(50, 10, "#00FF00", Math.random() * (canvasWidth - myObstacles[0].width) , obsHeight, "rectangle"));
       obsHeight -= 150;
     }
 	  }
     var canvasWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-    var canvasHeight = window.screen.availHeight;//(window.innerHeight > 0) ? window.innerHeight : screen.height;
+    var canvasHeight = window.screen.availHeight;
     var myGamePiece;
     var myObstacles = [];
     var obstacleDistance = 25;
