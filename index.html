@@ -1,14 +1,14 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <style>
 		body {
 		margin : 0 !important;
 		}
 		canvas {
 		background-color: #115599;
-		overflow : hidden;
+    display: block;
         }
 	</style>
   </head>
@@ -27,8 +27,8 @@
       obsHeight -= 150;
     }
 	  }
-    var canvasWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-    var canvasHeight = window.screen.availHeight;
+    var canvasWidth = window.innerWidth;
+    var canvasHeight = window.screen.height;
     var myGamePiece;
     var myObstacles = [];
     var obstacleDistance = 25;
