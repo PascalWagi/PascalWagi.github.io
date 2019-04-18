@@ -51,25 +51,18 @@
 			document.body.insertBefore(this.canvas, document.body.childNodes[0]);
       this.interval = setInterval(updateGameArea, 20);
       this.countFrame = 0;
-      this.canvas.addEventListener("touchstart", checkNewStart());
 		},
     clear : function() {
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
     stop : function() {
       clearInterval(this.interval);
-      stillRunning = false;
       var gameOver = new component("50px", "Consolas", "red", 50, canvasHeight / 2, "text");
       gameOver.text = "GAME OVER";
       gameOver.update();
+      setTimeout(function(){window.location.reload()}, 5000);
     }
 		}
-
-    function checkNewStart() {
-      if (stillRunning) {
-        window.location.reload();
-      }
-    }
 
     function getCanvasHeight() {
       return canvasHeight;
