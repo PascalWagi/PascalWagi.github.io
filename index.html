@@ -135,13 +135,18 @@
         var otherleft = otherObject.x
         var otherright = otherObject.x + otherObject.width;
         var collision = true;
-        if (
+        if ((mybottom < othertop) ||
           (mytop > otherbottom) ||
           (myright < otherleft) ||
           (myleft > otherright) ||
           (this.gravitySpeed < 0)) {
             collision = false;
           }
+        if (collision) {
+          if (mybottom > othertop) {
+            collision = false;
+          }
+        }
           return collision;
       }
     }
