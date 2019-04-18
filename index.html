@@ -203,11 +203,15 @@
       }
       return false;
     }
-
+    var reverted = false;
     if (window.DeviceOrientationEvent) {
     window.addEventListener("devicemotion", function(event) {
       switch(window.orientation) {
         case 0:
+          if (reverted) {
+            myGamePiece.speedX = event.accelerationIncludingGravity.x;
+            break;
+          }
           myGamePiece.speedX = event.accelerationIncludingGravity.x * (-1);
           break;
         case 180:
@@ -238,11 +242,21 @@
         elem.msRequestFullscreen();
       }
 
-    element = document.getElementById("start")
+    element = document.getElementById("start");
+    element.parentNode.removeChild(element);
+    startGame();
+  }
+
+  function silkePhone() {
+    reverted = true;
+    element = document.getElementById("start");
+    element.parentNode.removeChild(element);
+    element = document.getElementById("silke");
     element.parentNode.removeChild(element);
     startGame();
   }
     </script>
     <button id="start" onClick="fullScreen();"> Starte im Vollbildmodus </button>
+    <button id="silke" onClick="silkePhone();"> Für Silke hier drücken! </button>
   </body>
 </html>
