@@ -10,6 +10,13 @@
 		background-color: #115599;
     display: block;
         }
+    #start {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+    }
 	</style>
   </head>
    <body>
@@ -34,6 +41,7 @@
     var obstacleDistance = 25;
     var score;
     var countScore = 0;
+    var stillRunning = true;
 	  var myGameArea = {
 		canvas : document.createElement("canvas"),
 		start : function() {
@@ -43,18 +51,25 @@
 			document.body.insertBefore(this.canvas, document.body.childNodes[0]);
       this.interval = setInterval(updateGameArea, 20);
       this.countFrame = 0;
+      this.canvas.addEventListener("touchstart", checkNewStart());
 		},
     clear : function() {
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
     stop : function() {
       clearInterval(this.interval);
+      stillRunning = false;
       var gameOver = new component("50px", "Consolas", "red", 50, canvasHeight / 2, "text");
       gameOver.text = "GAME OVER";
       gameOver.update();
-      window.addEventListener("onClick", window.location.reload(), false);
     }
 		}
+
+    function checkNewStart() {
+      if (!stillRunning) {
+        window.location.reload();
+      }
+    }
 
     function getCanvasHeight() {
       return canvasHeight;
