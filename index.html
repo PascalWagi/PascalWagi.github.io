@@ -213,19 +213,31 @@
     window.addEventListener("devicemotion", function(event) {
       switch(window.orientation) {
         case 0:
-          if (reverted) {
+          if (isIOS) {
             myGamePiece.speedX = event.accelerationIncludingGravity.x;
             break;
           }
           myGamePiece.speedX = event.accelerationIncludingGravity.x * (-1);
           break;
         case 180:
+          if (isIOS) {
+            myGamePiece.speedX = event.accelerationIncludingGravity.x * (-1);
+            break;
+          }
           myGamePiece.speedX = event.accelerationIncludingGravity.x;
           break;
         case 90:
+          if (isIOS) {
+            myGamePiece.speedX = event.accelerationIncludingGravity.y * (-1);
+            break;
+          }
           myGamePiece.speedX = event.accelerationIncludingGravity.y;
           break;
         case -90:
+          if (isIOS) {
+            myGamePiece.speedX = event.accelerationIncludingGravity.y;
+            break;
+          }
           myGamePiece.speedX = event.accelerationIncludingGravity.y * (-1);
           break;
       }
@@ -235,27 +247,38 @@
     alert("Lea ist supi!");
   }
 
-  function fullScreen() {
-    var elem = document.documentElement;
-      if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-      } else if (elem.mozRequestFullScreen) { /* Firefox */
-        elem.mozRequestFullScreen();
-      } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-        elem.webkitRequestFullscreen();
-      } else if (elem.msRequestFullscreen) { /* IE/Edge */
-        elem.msRequestFullscreen();
-      }
+  var isIOS = false;
 
-    element = document.getElementById("start");
-    element.parentNode.removeChild(element);
-    startGame();
+  function fullScreen() {
+    if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+      isIOS = true;
+      element = document.getElementById("start");
+      element.parentNode.removeChild(element);
+      element2 = document.getElementById("silke");
+      element2.parentNode.removeChild(element2);
+      startGame();
+    } else {
+      var elem = document.documentElement;
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) { /* Firefox */
+          elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+          elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE/Edge */
+          elem.msRequestFullscreen();
+        }
+
+      element = document.getElementById("start");
+      element.parentNode.removeChild(element);
+      element2 = document.getElementById("silke");
+      element2.parentNode.removeChild(element2);
+      startGame();
+    }
   }
 
   function silkePhone() {
-    reverted = true;
-    element = document.getElementById("silke");
-    element.parentNode.removeChild(element);
+    isIOS = true;
     fullScreen();
   }
     </script>
