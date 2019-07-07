@@ -252,12 +252,12 @@
   function fullScreen() {
     if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
       isIOS = true;
-      /*element = document.getElementById("start");
+      element = document.getElementById("start");
       element.parentNode.removeChild(element);
       element2 = document.getElementById("silke");
       element2.parentNode.removeChild(element2);
-      startGame();*/
-    } //else {
+      startGame();
+    } else {
       var elem = document.documentElement;
         if (elem.requestFullscreen) {
           elem.requestFullscreen();
@@ -274,7 +274,7 @@
       element2 = document.getElementById("silke");
       element2.parentNode.removeChild(element2);
       startGame();
-    //}
+    }
   }
 
   function silkePhone() {
